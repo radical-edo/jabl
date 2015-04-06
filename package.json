@@ -1,0 +1,23 @@
+{
+  "name": "node-rabl",
+  "version": "0.0.0",
+  "description": "Rabl for Node.js",
+  "main": "lib/rabl.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "rabl",
+    "json",
+    "views",
+    "template"
+  ],
+  "author": {
+    "name": "radical-edo",
+    "email" : "radical.3do@gmail.com"
+  },
+  "license": "ISC",
+  "repository": {
+    "github": "git@github.com:radical-edo/node-rabl.git"
+  }
+}
