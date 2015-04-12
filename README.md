@@ -1,2 +1,2 @@
-# node-rabl
-Rabl for Node.js
+# nabl
+Rabl implementation for Node.js
