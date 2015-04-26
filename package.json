@@ -21,9 +21,10 @@
   "repository": {
     "github": "git@github.com:radical-edo/jabl.git"
   },
-  "dependencies": {
+  "devDependencies": {
     "chai": "2.2.0",
     "coffee-script": "1.9.2",
-    "mocha": "2.2.4"
+    "mocha": "2.2.4",
+    "rosie": "0.4.1"
   }
 }
