@@ -2,22 +2,28 @@
   "name": "node-rabl",
   "version": "0.0.0",
   "description": "Rabl for Node.js",
-  "main": "lib/rabl.js",
+  "main": "lib/jabl.js",
   "scripts": {
-    "test": "npm test"
+    "test": "bin/test"
   },
   "keywords": [
     "rabl",
     "json",
     "views",
-    "template"
+    "template",
+    "node"
   ],
   "author": {
     "name": "radical-edo",
-    "email" : "radical.3do@gmail.com"
+    "email": "radical.3do@gmail.com"
   },
   "license": "ISC",
   "repository": {
-    "github": "git@github.com:radical-edo/node-rabl.git"
+    "github": "git@github.com:radical-edo/jabl.git"
+  },
+  "dependencies": {
+    "chai": "2.2.0",
+    "coffee-script": "1.9.2",
+    "mocha": "2.2.4"
   }
 }
