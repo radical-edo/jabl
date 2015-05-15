@@ -14,7 +14,8 @@
     "node"
   ],
   "author": {
-    "name": "radical-edo",
+    "fullname": "Mateusz Barczak",
+    "alias" : "radical-edo",
     "email": "radical.3do@gmail.com"
   },
   "license": "ISC",
