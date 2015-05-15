@@ -12,13 +12,13 @@ describe 'lib/jabl', ->
         done()
     context 'attributes', ->
       attributesSchema =
-        "id" : "/attributesSchema"
-        "type" : "object"
-        "properties" :
-          "id" : "type" : "integer"
-          "title" : "type" : "string"
-          "content" : "type" : "string"
-        "required" : ["id", "title", "content"]
+        id: "/attributesSchema"
+        type: "object"
+        properties:
+          id: type: "integer"
+          title: type: "string"
+          content: type: "string"
+        required: ["id", "title", "content"]
       beforeEach ->
         post = Factory.build 'post'
         jabl = new Jabl 'posts/attributes', [post]
