@@ -2,8 +2,6 @@ Jabl = require "#{__rootdir}/lib/jabl"
 
 describe 'lib/jabl', ->
   jabl = post = null
-  before ->
-    Jabl.searchPaths.push 'tests/fixtures/templates'
   beforeEach ->
   describe '#render', ->
     context 'node', ->
