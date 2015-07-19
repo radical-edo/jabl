@@ -10,15 +10,13 @@ describe 'lib/jabl/renderer', ->
         type: "object"
         properties:
           id: type: "integer"
-          title: type: "string"
-          content: type: "string"
           tags:
             type: 'array'
             items: type: 'string'
-        required: ["id", "title", "content"]
+        required: ['id', 'tags']
       beforeEach ->
         post = Factory.build 'post', tags: ['dude']
-        renderer = new Renderer 'node/return_property', [post]
+        renderer = new Renderer 'node/just_node', [post]
       it 'returns JSON', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
@@ -27,7 +25,7 @@ describe 'lib/jabl/renderer', ->
           expect(jsData.length).to.equal 1
           expect(validate.errors).to.deep.equal []
           done()
-    context 'attributes', ->
+    xcontext 'attributes', ->
       attributesSchema =
         id: "/attributesSchema"
         type: "object"
