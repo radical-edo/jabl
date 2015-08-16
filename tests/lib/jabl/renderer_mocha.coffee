@@ -25,7 +25,7 @@ describe 'lib/jabl/renderer', ->
           expect(jsData.length).to.equal 1
           expect(validate.errors).to.deep.equal []
           done()
-    xcontext 'attributes', ->
+    context 'attributes', ->
       attributesSchema =
         id: "/attributesSchema"
         type: "object"
