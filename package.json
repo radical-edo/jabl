@@ -4,7 +4,7 @@
   "description": "Rabl for Node.js",
   "main": "lib/jabl.js",
   "scripts": {
-    "pretest" : "bin/jshint",
+    "pretest": "bin/jshint",
     "test": "bin/test"
   },
   "keywords": [
@@ -27,6 +27,7 @@
     "chai": "2.2.0",
     "coffee-script": "1.9.2",
     "jshint": "^2.8.0",
+    "jshint-stylish": "^2.0.1",
     "jsonschema": "1.0.1",
     "mocha": "2.2.4",
     "node-strap": "0.2.1",
