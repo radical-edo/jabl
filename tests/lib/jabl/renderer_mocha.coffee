@@ -4,6 +4,32 @@ describe 'lib/jabl/renderer', ->
   renderer = null
 
   describe '#render', ->
+    context 'node + attribute', ->
+      nodeSchema =
+        id: "/nodeSchema"
+        type: "object"
+        properties:
+          id: type: "integer"
+          content: type: 'string'
+          title: type: 'string'
+          tags:
+            type: 'array'
+            items: type: 'string'
+        required: ['id', 'tags', 'title', 'content']
+
+      beforeEach ->
+        post = Factory.build 'post', tags: ['dude']
+        renderer = new Renderer 'node/return_property', [post]
+
+      it 'returns JSON', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
+          validate = json.validate(jsData[0], nodeSchema)
+          expect(jsData).to.be.an.Array
+          expect(jsData.length).to.equal 1
+          expect(validate.errors).to.deep.equal []
+          done()
+      
     context 'node', ->
       nodeSchema =
         id: "/nodeSchema"
