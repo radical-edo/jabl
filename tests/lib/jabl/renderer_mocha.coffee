@@ -1,7 +1,10 @@
 Renderer = require "#{__rootdir}/lib/jabl/renderer"
 
 describe 'lib/jabl/renderer', ->
-  renderer = null
+  [renderer, post] = [null, null]
+
+  beforeEach ->
+    post = Factory.build 'post', tags: ['dude']
 
   describe '#render', ->
     context 'node + attribute', ->
@@ -18,18 +21,24 @@ describe 'lib/jabl/renderer', ->
         required: ['id', 'tags', 'title', 'content']
 
       beforeEach ->
-        post = Factory.build 'post', tags: ['dude']
         renderer = new Renderer 'node/return_property', [post]
 
-      it 'returns JSON', ->
+      it 'creates json array', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
+          expect(jsData).to.be.an.Array
+
+      it 'has one object', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
+          expect(jsData.length).to.equal 1
+
+      it 'has no errors', ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
-          expect(jsData).to.be.an.Array
-          expect(jsData.length).to.equal 1
           expect(validate.errors).to.deep.equal []
-          done()
-      
+
     context 'node', ->
       nodeSchema =
         id: "/nodeSchema"
@@ -40,17 +49,26 @@ describe 'lib/jabl/renderer', ->
             type: 'array'
             items: type: 'string'
         required: ['id', 'tags']
+
       beforeEach ->
-        post = Factory.build 'post', tags: ['dude']
         renderer = new Renderer 'node/just_node', [post]
-      it 'returns JSON', (done) ->
+
+      it 'creates json array', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
+          expect(jsData).to.be.an.Array
+
+      it 'has one object', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
+          expect(jsData.length).to.equal 1
+
+      it 'has no errors', ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
-          expect(jsData).to.be.an.Array
-          expect(jsData.length).to.equal 1
           expect(validate.errors).to.deep.equal []
-          done()
+
     context 'attributes', ->
       attributesSchema =
         id: "/attributesSchema"
@@ -60,15 +78,22 @@ describe 'lib/jabl/renderer', ->
           title: type: "string"
           content: type: "string"
         required: ["id", "title", "content"]
+
       beforeEach ->
-        post = Factory.build 'post'
         renderer = new Renderer 'attributes/single_line', [post]
-      it 'returns JSON', (done) ->
+
+      it 'creates json array', ->
         renderer.render (data) ->
           jsData = JSON.parse data
-          validate = json.validate(jsData[0], attributesSchema)
           expect(jsData).to.be.an.Array
+
+      it 'has one object', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
           expect(jsData.length).to.equal 1
+
+      it 'has no errors', ->
+        renderer.render (data) ->
+          jsData = JSON.parse data
+          validate = json.validate(jsData[0], nodeSchema)
           expect(validate.errors).to.deep.equal []
-          done()
-    
