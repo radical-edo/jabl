@@ -23,21 +23,24 @@ describe 'lib/jabl/renderer', ->
       beforeEach ->
         renderer = new Renderer 'node/return_property', [post]
 
-      it 'creates json array', ->
+      it 'creates json array', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData).to.be.an.Array
+          done()
 
-      it 'has one object', ->
+      it 'has one object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData.length).to.equal 1
+          done()
 
-      it 'has no errors', ->
+      it 'has no errors', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
           expect(validate.errors).to.deep.equal []
+          done()
 
     context 'node', ->
       nodeSchema =
@@ -53,24 +56,27 @@ describe 'lib/jabl/renderer', ->
       beforeEach ->
         renderer = new Renderer 'node/just_node', [post]
 
-      it 'creates json array', ->
+      it 'creates json array', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData).to.be.an.Array
+          done()
 
-      it 'has one object', ->
+      it 'has one object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData.length).to.equal 1
+          done()
 
-      it 'has no errors', ->
+      it 'has no errors', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
           expect(validate.errors).to.deep.equal []
+          done()
 
     context 'attributes', ->
-      attributesSchema =
+      nodeSchema =
         id: "/attributesSchema"
         type: "object"
         properties:
@@ -82,18 +88,21 @@ describe 'lib/jabl/renderer', ->
       beforeEach ->
         renderer = new Renderer 'attributes/single_line', [post]
 
-      it 'creates json array', ->
+      it 'creates json array', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData).to.be.an.Array
+          done()
 
-      it 'has one object', ->
+      it 'has one object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData.length).to.equal 1
+          done()
 
-      it 'has no errors', ->
+      it 'has no errors', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
           expect(validate.errors).to.deep.equal []
+          done()
