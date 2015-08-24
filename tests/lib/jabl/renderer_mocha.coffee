@@ -88,6 +88,17 @@ describe 'lib/jabl/renderer', ->
       beforeEach ->
         renderer = new Renderer 'attributes/single_line', [post]
 
+      context 'function as attribute', ->
+        beforeEach ->
+          post = Factory.build 'post', title: -> 'Meow'
+          renderer = new Renderer 'attributes/single_line', [post]
+
+        it 'title is Meow', (done) ->
+          renderer.render (data) ->
+            jsData = JSON.parse data
+            expect(jsData[0].title).to.equal 'Meow'
+            done()
+
       it 'creates json array', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
