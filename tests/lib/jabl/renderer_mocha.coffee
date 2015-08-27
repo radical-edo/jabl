@@ -5,6 +5,7 @@ describe 'lib/jabl/renderer', ->
 
   beforeEach ->
     post = Factory.build 'post', tags: ['dude']
+    renderer = new Renderer 'posts/index', [post]
 
   describe '#render', ->
     context 'node + attribute', ->
@@ -20,10 +21,7 @@ describe 'lib/jabl/renderer', ->
             items: type: 'string'
         required: ['id', 'tags', 'title', 'content']
 
-      beforeEach ->
-        renderer = new Renderer 'node/return_property', [post]
-
-      it 'creates json array', (done) ->
+      it 'creates json object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           expect(jsData).to.be.an.Array
@@ -52,9 +50,6 @@ describe 'lib/jabl/renderer', ->
             type: 'array'
             items: type: 'string'
         required: ['id', 'tags']
-
-      beforeEach ->
-        renderer = new Renderer 'node/just_node', [post]
 
       it 'creates json array', (done) ->
         renderer.render (data) ->
@@ -85,13 +80,10 @@ describe 'lib/jabl/renderer', ->
           content: type: "string"
         required: ["id", "title", "content"]
 
-      beforeEach ->
-        renderer = new Renderer 'attributes/single_line', [post]
-
       context 'function as attribute', ->
         beforeEach ->
           post = Factory.build 'post', title: -> 'Meow'
-          renderer = new Renderer 'attributes/single_line', [post]
+          renderer = new Renderer 'posts/index', [post]
 
         it 'title is Meow', (done) ->
           renderer.render (data) ->

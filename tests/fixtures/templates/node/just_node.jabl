@@ -1,7 +1,0 @@
-node('tags', function (post) {
-  return post.tags;
-});
-
-node('id', function (p) {
-  return p.id
-});
