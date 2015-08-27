@@ -1,10 +1,1 @@
-
-node('id', function (p) {
-  return p.id
-});
-
-attributes('content', 'title');
-
-node('tags', function (post) {
-  return post.tags;
-});
+takes('posts/base');
