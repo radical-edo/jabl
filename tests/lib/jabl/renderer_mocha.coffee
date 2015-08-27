@@ -32,14 +32,14 @@ describe 'lib/jabl/renderer', ->
       it 'has one object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
-          expect(jsData.length).to.equal 1
+          expect(jsData.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
-          expect(validate.errors).to.deep.equal []
+          expect(validate.errors).to.eql []
           done()
 
     context 'node', ->
@@ -65,14 +65,14 @@ describe 'lib/jabl/renderer', ->
       it 'has one object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
-          expect(jsData.length).to.equal 1
+          expect(jsData.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
-          expect(validate.errors).to.deep.equal []
+          expect(validate.errors).to.eql []
           done()
 
     context 'attributes', ->
@@ -96,7 +96,7 @@ describe 'lib/jabl/renderer', ->
         it 'title is Meow', (done) ->
           renderer.render (data) ->
             jsData = JSON.parse data
-            expect(jsData[0].title).to.equal 'Meow'
+            expect(jsData[0].title).to.eql 'Meow'
             done()
 
       it 'creates json array', (done) ->
@@ -108,12 +108,12 @@ describe 'lib/jabl/renderer', ->
       it 'has one object', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
-          expect(jsData.length).to.equal 1
+          expect(jsData.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
           jsData = JSON.parse data
           validate = json.validate(jsData[0], nodeSchema)
-          expect(validate.errors).to.deep.equal []
+          expect(validate.errors).to.eql []
           done()
