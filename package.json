@@ -1,6 +1,6 @@
 {
   "name": "node-rabl",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Rabl for Node.js",
   "main": "lib/jabl.js",
   "scripts": {
