@@ -8,6 +8,34 @@ describe 'lib/jabl/renderer', ->
     renderer = new Renderer 'posts/index', [post]
 
   describe '#render', ->
+    context 'assumes not a collection by default', ->
+      nodeSchema =
+        id: "/nodeSchema"
+        type: "object"
+        properties:
+          id: type: "integer"
+          content: type: 'string'
+          title: type: 'string'
+          tags:
+            type: 'array'
+            items: type: 'string'
+        required: ['id', 'tags', 'title', 'content']
+      beforeEach ->
+        post = Factory.build 'post', tags: ['dude']
+        renderer = new Renderer 'posts/show', post
+
+      it 'returns just a object', (done) ->
+        renderer.render (data) ->
+          data = JSON.parse data
+          expect(data).not.to.be.an Array
+          done()
+
+      it 'has no errors', (done) ->
+        renderer.render (data) ->
+          validate = json.validate JSON.parse(data), nodeSchema
+          expect(validate.errors).to.eql []
+          done()
+
     context 'node + attribute', ->
       nodeSchema =
         id: "/nodeSchema"

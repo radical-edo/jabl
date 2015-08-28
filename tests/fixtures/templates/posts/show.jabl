@@ -1,0 +1,3 @@
+object();
+
+takes('posts/base');
