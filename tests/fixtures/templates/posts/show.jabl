@@ -1,3 +1,7 @@
 object();
 
 takes('posts/base');
+
+node('foo', function () {
+  return 'bar';
+});

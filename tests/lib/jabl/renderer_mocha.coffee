@@ -16,10 +16,11 @@ describe 'lib/jabl/renderer', ->
           id: type: "integer"
           content: type: 'string'
           title: type: 'string'
+          foo: type: 'string'
           tags:
             type: 'array'
             items: type: 'string'
-        required: ['id', 'tags', 'title', 'content']
+        required: ['id', 'tags', 'title', 'content', 'foo']
       beforeEach ->
         post = Factory.build 'post', tags: ['dude']
         renderer = new Renderer 'posts/show', post
@@ -29,6 +30,13 @@ describe 'lib/jabl/renderer', ->
           data = JSON.parse data
           expect(data).not.to.be.an Array
           done()
+
+      context 'takes', ->
+        it 'adds a custom node even after #takes has finished', (done) ->
+          renderer.render (data) ->
+            data = JSON.parse data
+            expect(data.foo).to.eql 'bar'
+            done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
@@ -44,10 +52,11 @@ describe 'lib/jabl/renderer', ->
           id: type: "integer"
           content: type: 'string'
           title: type: 'string'
+          foo: type: 'string'
           tags:
             type: 'array'
             items: type: 'string'
-        required: ['id', 'tags', 'title', 'content']
+        required: ['id', 'tags', 'title', 'content', 'foo']
 
       it 'creates json object', (done) ->
         renderer.render (data) ->
