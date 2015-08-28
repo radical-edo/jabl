@@ -1,1 +1,3 @@
+collection();
+
 takes('posts/base');
