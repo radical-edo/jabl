@@ -13,9 +13,23 @@ describe 'lib/jabl/renderer', ->
       beforeEach ->
         renderer = new Renderer 'posts/show', post
 
+      commentSchema =
+        id: "/commentSchema"
+        type: "object"
+        properties:
+          id: type: "integer"
+          content: type: 'string'
+        required: ['id', 'content']
+
       it 'has comments array', (done) ->
         renderer.render (data) ->
           expect(JSON.parse(data).comments).to.be.an Array
+          done()
+
+      it 'has no errors', (done) ->
+        renderer.render (data) ->
+          validate = json.validate JSON.parse(data).comments[0], commentSchema
+          expect(validate.errors).to.eql []
           done()
 
     context 'assumes not a collection by default', ->
@@ -31,6 +45,7 @@ describe 'lib/jabl/renderer', ->
             type: 'array'
             items: type: 'string'
         required: ['id', 'tags', 'title', 'content', 'foo']
+
       beforeEach ->
         post = Factory.build 'post', tags: ['dude']
         renderer = new Renderer 'posts/show', post
