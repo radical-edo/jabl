@@ -8,6 +8,16 @@ describe 'lib/jabl/renderer', ->
     renderer = new Renderer 'posts/index', [post]
 
   describe '#render', ->
+    context 'child', ->
+
+      beforeEach ->
+        renderer = new Renderer 'posts/show', post
+
+      it 'has comments array', (done) ->
+        renderer.render (data) ->
+          expect(JSON.parse(data).comments).to.be.an Array
+          done()
+
     context 'assumes not a collection by default', ->
       nodeSchema =
         id: "/nodeSchema"

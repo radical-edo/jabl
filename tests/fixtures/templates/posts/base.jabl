@@ -7,3 +7,7 @@ attributes('content', 'title');
 node('tags', function (post) {
   return post.tags;
 });
+
+child('comments', function () {
+  takes('comments/base');
+});
