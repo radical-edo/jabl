@@ -8,6 +8,30 @@ describe 'lib/jabl/renderer', ->
     renderer = new Renderer 'posts/index', [post]
 
   describe '#render', ->
+    context 'partial', ->
+      beforeEach ->
+        renderer = new Renderer 'posts/show', post
+
+      userSchema =
+        id: "/userSchema"
+        type: "object"
+        properties:
+          id: type: "integer"
+          name: type: 'string'
+        required: ['id', 'name']
+
+      it 'adds an object to the root object', (done) ->
+        renderer.render (data) ->
+          data = JSON.parse data
+          expect(Object::toString.call data.author).to.eql '[object Object]'
+          done()
+
+      it 'has all the required fields', (done) ->
+        renderer.render (data) ->
+          validate = json.validate JSON.parse(data).author, userSchema
+          expect(validate.errors).to.eql []
+          done()
+
     context 'child', ->
 
       beforeEach ->

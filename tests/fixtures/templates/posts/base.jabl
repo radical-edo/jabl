@@ -11,3 +11,7 @@ node('tags', function (post) {
 child('comments', function () {
   takes('comments/base');
 });
+
+node('author', function (post) {
+  return partial('user/base', { object: post.author });
+});
