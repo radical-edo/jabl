@@ -8,6 +8,16 @@ describe 'lib/jabl/renderer', ->
     renderer = new Renderer 'posts/index', [post]
 
   describe '#render', ->
+    context 'glue', ->
+      beforeEach ->
+        renderer = new Renderer 'posts/show', post
+
+      it 'has numnber_of_likes', (done) ->
+        renderer.render (data) ->
+          data = JSON.parse data
+          expect(data.number_of_likes).to.eql 2
+          done()
+        
     context 'partial', ->
       beforeEach ->
         renderer = new Renderer 'posts/show', post

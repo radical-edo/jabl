@@ -1,6 +1,7 @@
 _ = require 'lodash'
 require './comments'
 require './users'
+require './likes'
 
 module.exports =
   Factory.define('post')
@@ -10,4 +11,6 @@ module.exports =
     .attr 'comments', ['comments'], (comments = _.range 1) ->
       comments.map -> Factory.build 'comment'
     .attr 'content', 'Meh'
+    .attr 'likes', ['likes'], (likes = _.range 2) ->
+      likes.map -> Factory.build 'like'
 

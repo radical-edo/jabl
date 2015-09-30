@@ -15,3 +15,9 @@ child('comments', function () {
 node('author', function (post) {
   return partial('user/base', { object: post.author });
 });
+
+glue(this.datum.likes, function () {
+  node('number_of_likes', function (likes) {
+    return likes.length;
+  });
+});
