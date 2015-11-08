@@ -30,6 +30,15 @@ describe 'lib/jabl/renderer', ->
           name: type: 'string'
         required: ['id', 'name']
 
+      context 'options', ->
+        context 'locals', ->
+          it "doesn't have hiddenFoo property", (done) ->
+            renderer.render (post) ->
+              post = JSON.parse post
+              expect(post.author).not.to.have.property 'hiddenFoo'
+              done()
+            
+
       it 'adds an object to the root object', (done) ->
         renderer.render (data) ->
           data = JSON.parse data

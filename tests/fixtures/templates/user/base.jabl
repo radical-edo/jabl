@@ -1,1 +1,7 @@
 attributes('id', 'name');
+
+if (locals.hiddenFoo) {
+  node('hiddenFoo', function () {
+    return false;
+  });
+}
