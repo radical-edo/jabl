@@ -1,6 +1,6 @@
 collection();
 
-takes('posts/base');
+takes('posts/base', { locals: { hideFoo: true } });
 
 node('foo', function () {
   return 'bar';

@@ -12,6 +12,12 @@ child('comments', function () {
   takes('comments/base');
 });
 
+if (locals.hideFoo) {
+  node('hiddenFoo', function () {
+    return false;
+  });
+}
+
 node('author', function (post) {
   return partial('user/base', { object: post.author });
 });

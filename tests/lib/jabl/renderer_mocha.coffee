@@ -91,6 +91,15 @@ describe 'lib/jabl/renderer', ->
           done()
 
       context 'takes', ->
+        context 'options', ->
+          context 'locals', ->
+            it "doesn't have hiddenFoo property", (done) ->
+              renderer.render (data) ->
+                data = JSON.parse data
+                expect(data).not.to.have.property 'hiddenFoo'
+                done()
+              
+          
         it 'adds a custom node even after #takes has finished', (done) ->
           renderer.render (data) ->
             data = JSON.parse data
