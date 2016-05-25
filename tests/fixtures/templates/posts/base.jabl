@@ -2,7 +2,7 @@ node('id', function (p) {
   return p.id
 });
 
-attributes('content', 'title');
+attributes({ content: 'body' }, 'title');
 
 node('tags', function (post) {
   return post.tags;

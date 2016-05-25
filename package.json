@@ -38,6 +38,6 @@
     "rosie": "0.4.1"
   },
   "dependencies": {
-    "lodash": "3.8.0"
+    "lodash": "4.13.1"
   }
 }

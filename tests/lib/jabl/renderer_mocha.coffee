@@ -87,7 +87,7 @@ describe 'lib/jabl/renderer', ->
           tags:
             type: 'array'
             items: type: 'string'
-        required: ['id', 'tags', 'title', 'content', 'foo']
+        required: ['id', 'tags', 'title', 'body', 'foo']
 
       beforeEach ->
         post = Factory.build 'post', tags: ['dude']
@@ -133,7 +133,7 @@ describe 'lib/jabl/renderer', ->
           tags:
             type: 'array'
             items: type: 'string'
-        required: ['id', 'tags', 'title', 'content', 'foo']
+        required: ['id', 'tags', 'title', 'body', 'foo']
 
       it 'creates json object', (done) ->
         renderer.render (data) ->
@@ -192,7 +192,7 @@ describe 'lib/jabl/renderer', ->
           id: type: "integer"
           title: type: "string"
           content: type: "string"
-        required: ["id", "title", "content"]
+        required: ["id", "title", "body"]
 
       context 'function as attribute', ->
         beforeEach ->
