@@ -7,6 +7,10 @@
     "pretest": "bin/jshint",
     "test": "bin/test"
   },
+  "engines": {
+    "node": ">=6.2",
+    "npm": ">=3.8"
+  },
   "keywords": [
     "rabl",
     "json",
