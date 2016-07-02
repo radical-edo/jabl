@@ -14,7 +14,6 @@ describe 'lib/jabl/renderer', ->
 
       it 'has numnber_of_likes', (done) ->
         renderer.render (data) ->
-          data = JSON.parse data
           expect(data.number_of_likes).to.eql 2
           done()
         
@@ -34,20 +33,18 @@ describe 'lib/jabl/renderer', ->
         context 'locals', ->
           it "doesn't have hiddenFoo property", (done) ->
             renderer.render (post) ->
-              post = JSON.parse post
               expect(post.author).not.to.have.property 'hiddenFoo'
               done()
             
 
       it 'adds an object to the root object', (done) ->
         renderer.render (data) ->
-          data = JSON.parse data
           expect(Object::toString.call data.author).to.eql '[object Object]'
           done()
 
       it 'has all the required fields', (done) ->
         renderer.render (data) ->
-          validate = json.validate JSON.parse(data).author, userSchema
+          validate = json.validate data.author, userSchema
           expect(validate.errors).to.eql []
           done()
 
@@ -66,12 +63,12 @@ describe 'lib/jabl/renderer', ->
 
       it 'has comments array', (done) ->
         renderer.render (data) ->
-          expect(JSON.parse(data).comments).to.be.an Array
+          expect(data.comments).to.be.an Array
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
-          validate = json.validate JSON.parse(data).comments[0], commentSchema
+          validate = json.validate data.comments[0], commentSchema
           expect(validate.errors).to.eql []
           done()
 
@@ -95,7 +92,6 @@ describe 'lib/jabl/renderer', ->
 
       it 'returns just a object', (done) ->
         renderer.render (data) ->
-          data = JSON.parse data
           expect(data).not.to.be.an Array
           done()
 
@@ -104,20 +100,18 @@ describe 'lib/jabl/renderer', ->
           context 'locals', ->
             it "doesn't have hiddenFoo property", (done) ->
               renderer.render (data) ->
-                data = JSON.parse data
                 expect(data).not.to.have.property 'hiddenFoo'
                 done()
               
           
         it 'adds a custom node even after #takes has finished', (done) ->
           renderer.render (data) ->
-            data = JSON.parse data
             expect(data.foo).to.eql 'bar'
             done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
-          validate = json.validate JSON.parse(data), nodeSchema
+          validate = json.validate data, nodeSchema
           expect(validate.errors).to.eql []
           done()
 
@@ -137,20 +131,17 @@ describe 'lib/jabl/renderer', ->
 
       it 'creates json object', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          expect(jsData).to.be.an.Array
+          expect(data).to.be.an.Array
           done()
 
       it 'has one object', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          expect(jsData.length).to.eql 1
+          expect(data.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          validate = json.validate(jsData[0], nodeSchema)
+          validate = json.validate(data[0], nodeSchema)
           expect(validate.errors).to.eql []
           done()
 
@@ -167,20 +158,17 @@ describe 'lib/jabl/renderer', ->
 
       it 'creates json array', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          expect(jsData).to.be.an.Array
+          expect(data).to.be.an.Array
           done()
 
       it 'has one object', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          expect(jsData.length).to.eql 1
+          expect(data.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          validate = json.validate(jsData[0], nodeSchema)
+          validate = json.validate(data[0], nodeSchema)
           expect(validate.errors).to.eql []
           done()
 
@@ -201,25 +189,21 @@ describe 'lib/jabl/renderer', ->
 
         it 'title is Meow', (done) ->
           renderer.render (data) ->
-            jsData = JSON.parse data
-            expect(jsData[0].title).to.eql 'Meow'
+            expect(data[0].title).to.eql 'Meow'
             done()
 
       it 'creates json array', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          expect(jsData).to.be.an.Array
+          expect(data).to.be.an.Array
           done()
 
       it 'has one object', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          expect(jsData.length).to.eql 1
+          expect(data.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
         renderer.render (data) ->
-          jsData = JSON.parse data
-          validate = json.validate(jsData[0], nodeSchema)
+          validate = json.validate(data[0], nodeSchema)
           expect(validate.errors).to.eql []
           done()
