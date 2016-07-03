@@ -13,7 +13,7 @@ describe 'lib/jabl/renderer', ->
         renderer = new Renderer 'posts/show', post
 
       it 'has numnber_of_likes', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data.number_of_likes).to.eql 2
           done()
         
@@ -32,18 +32,18 @@ describe 'lib/jabl/renderer', ->
       context 'options', ->
         context 'locals', ->
           it "doesn't have hiddenFoo property", (done) ->
-            renderer.render (post) ->
+            renderer.render().then (post) ->
               expect(post.author).not.to.have.property 'hiddenFoo'
               done()
             
 
       it 'adds an object to the root object', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(Object::toString.call data.author).to.eql '[object Object]'
           done()
 
       it 'has all the required fields', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           validate = json.validate data.author, userSchema
           expect(validate.errors).to.eql []
           done()
@@ -62,12 +62,12 @@ describe 'lib/jabl/renderer', ->
         required: ['id', 'content']
 
       it 'has comments array', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data.comments).to.be.an Array
           done()
 
       it 'has no errors', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           validate = json.validate data.comments[0], commentSchema
           expect(validate.errors).to.eql []
           done()
@@ -91,7 +91,7 @@ describe 'lib/jabl/renderer', ->
         renderer = new Renderer 'posts/show', post
 
       it 'returns just a object', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data).not.to.be.an Array
           done()
 
@@ -99,18 +99,18 @@ describe 'lib/jabl/renderer', ->
         context 'options', ->
           context 'locals', ->
             it "doesn't have hiddenFoo property", (done) ->
-              renderer.render (data) ->
+              renderer.render().then (data) ->
                 expect(data).not.to.have.property 'hiddenFoo'
                 done()
               
           
         it 'adds a custom node even after #takes has finished', (done) ->
-          renderer.render (data) ->
+          renderer.render().then (data) ->
             expect(data.foo).to.eql 'bar'
             done()
 
       it 'has no errors', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           validate = json.validate data, nodeSchema
           expect(validate.errors).to.eql []
           done()
@@ -130,17 +130,17 @@ describe 'lib/jabl/renderer', ->
         required: ['id', 'tags', 'title', 'body', 'foo']
 
       it 'creates json object', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data).to.be.an.Array
           done()
 
       it 'has one object', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           validate = json.validate(data[0], nodeSchema)
           expect(validate.errors).to.eql []
           done()
@@ -157,17 +157,17 @@ describe 'lib/jabl/renderer', ->
         required: ['id', 'tags']
 
       it 'creates json array', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data).to.be.an.Array
           done()
 
       it 'has one object', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           validate = json.validate(data[0], nodeSchema)
           expect(validate.errors).to.eql []
           done()
@@ -188,22 +188,22 @@ describe 'lib/jabl/renderer', ->
           renderer = new Renderer 'posts/index', [post]
 
         it 'title is Meow', (done) ->
-          renderer.render (data) ->
+          renderer.render().then (data) ->
             expect(data[0].title).to.eql 'Meow'
             done()
 
       it 'creates json array', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data).to.be.an.Array
           done()
 
       it 'has one object', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           expect(data.length).to.eql 1
           done()
 
       it 'has no errors', (done) ->
-        renderer.render (data) ->
+        renderer.render().then (data) ->
           validate = json.validate(data[0], nodeSchema)
           expect(validate.errors).to.eql []
           done()
