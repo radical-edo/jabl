@@ -5,7 +5,7 @@
   "main": "lib/jabl.js",
   "scripts": {
     "pretest": "bin/jshint",
-    "test": "bin/test"
+    "test": "NODE_ENV=test mocha tests/mocha_helper.js --reporter dot $(find tests -name *_tests.js)"
   },
   "engines": {
     "node": ">=6.2",

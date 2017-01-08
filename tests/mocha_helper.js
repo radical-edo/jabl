@@ -1,15 +1,16 @@
-require('coffee-script/register');
-var path = require('path');
-var strap = require('node-strap');
+'use strict';
+const path = require('path');
+const strap = require('node-strap');
+const Validator = require('jsonschema').Validator;
+
+const Jabl = require('../lib/jabl');
 
 global.expect = require('expect.js');
 global.context = describe;
 global.__rootdir = path.normalize(__dirname + '/..');
 global.__testdir = __dirname;
 global.Factory = require('rosie').Factory
-var Validator = require('jsonschema').Validator;
 global.json = new Validator();
-var Jabl = require(__rootdir + '/lib/jabl');
 Jabl.Config(function (config) {
   config.searchPaths.add('tests/fixtures/templates');
 });
