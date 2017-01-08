@@ -1,5 +1,5 @@
 'use strict';
-const Renderer = require(`${__rootdir}/lib/jabl/renderer`);
+const Renderer = require('../../../lib/jabl/renderer');
 
 describe('lib/jabl/renderer', function() {
   var [renderer, post] = [null, null];

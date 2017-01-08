@@ -1,13 +1,12 @@
 'use strict';
 const path = require('path');
 const strap = require('node-strap');
-const Validator = require('jsonschema').Validator;
+const { Validator } = require('jsonschema');
 
 const Jabl = require('../lib/jabl');
 
 global.expect = require('expect.js');
 global.context = describe;
-global.__rootdir = path.normalize(__dirname + '/..');
 global.__testdir = __dirname;
 global.Factory = require('rosie').Factory
 global.json = new Validator();
