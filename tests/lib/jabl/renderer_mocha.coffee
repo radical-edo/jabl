@@ -8,6 +8,14 @@ describe 'lib/jabl/renderer', ->
     renderer = new Renderer 'posts/index', [post]
 
   describe '#render', ->
+    context 'when an error occurs', ->
+      beforeEach ->
+        renderer = new Renderer 'posts', post
+
+      it 'should thrown a "ENOENT" file error', ->
+        renderer.render().catch (err) ->
+          expect(err.code).to.eql 'ENOENT'
+
     context 'glue', ->
       beforeEach ->
         renderer = new Renderer 'posts/show', post
