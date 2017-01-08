@@ -11,7 +11,7 @@ var Validator = require('jsonschema').Validator;
 global.json = new Validator();
 var Jabl = require(__rootdir + '/lib/jabl');
 Jabl.Config(function (config) {
-  config.searchPaths.push('tests/fixtures/templates/');
+  config.searchPaths.add('tests/fixtures/templates');
 });
 
 strap.files(__testdir + '/factories');
