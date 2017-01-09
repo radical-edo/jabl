@@ -235,6 +235,19 @@ describe('lib/jabl/renderer', function() {
         required: ["id", "title", "body"]
       };
 
+      context('when "post.content" is "undefined"', function () {
+        beforeEach(function () {
+          post = Factory.build('post', { content: undefined });
+          renderer = new Renderer('posts/index', [post]);
+        });
+
+        it('should have "body" set as "null", because "content" has been mapped as "body"', function () {
+          return renderer.render().then(function (data) {
+            expect(data[0].body).to.be(null);
+          });
+        });
+      });
+
       context('function as attribute', function () {
         beforeEach(function () {
           post = Factory.build('post', { title() { return 'Meow'; }});
